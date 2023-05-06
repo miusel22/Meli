@@ -23,8 +23,6 @@ app.get('/api/items', async (req, res) => {
       condition: result.condition,
       free_shipping: result.shipping.free_shipping
     }));
-    console.log("el resultado")
-
     const responseObj = {
       author: {
         name: 'Nombre del autor',
@@ -43,7 +41,7 @@ app.get('/api/items', async (req, res) => {
 // Endpoint para obtener detalles de un producto
 app.get('/api/items/:id', async (req, res) => {
   const id = req.params.id;
-
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     const [itemResponse, descriptionResponse] = await Promise.all([
       axios.get(`https://api.mercadolibre.com/items/${id}`),
