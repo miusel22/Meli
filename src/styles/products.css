@@ -1,0 +1,38 @@
+.card-product {
+    display: flex;
+    flex-direction: row;
+    margin-left: 200px;
+    margin-right: 200px;
+    background-color: white;
+
+}
+
+.card-product img {
+    padding: 10px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+}
+
+span {
+    text-decoration: none;
+}
+
+.ant-list .ant-list-item {
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+.price{
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.price img{
+width: 20px;
+}
+

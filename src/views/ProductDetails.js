@@ -27,7 +27,7 @@ export const ProductDetails = () => {
 
   return (
     <>
-    <h1>Hola</h1>
+     <BoxSearch />
     </>
   );
 };

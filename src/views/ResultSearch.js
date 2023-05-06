@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../redux/actions';
 import { BoxSearch } from './BoxSearch';
-import { List, Card, Rate, Divider } from 'antd';
+import Shipping from '../img/shipping.png'
 
 export const ResultSearch = () => {
     const { search: urlSearch } = useParams();
@@ -11,7 +11,7 @@ export const ResultSearch = () => {
     const dispatch = useDispatch();
 
     const products = useSelector((state) => state.products);
-    console.log({products})
+    console.log({ products })
 
     const [search, setSearch] = useState(urlSearch);
 
@@ -28,30 +28,30 @@ export const ResultSearch = () => {
     return (
         <>
             <BoxSearch />
-            {products &&(
-                <List
-                locale={{ emptyText: 'No ratings' }}
-                grid={{ gutter: 8, column: 1 }}
-                dataSource={products}
-                renderItem={(item) => (
-                    <List.Item>
+            {products && (
+                products.map(item => (
                     <Link to={`/items/${item.id}/description`}>
-                        <Card
-                            className="centered-card"
-                            cover={<img src={item.picture} />}
-                            title={item.id}
-                            bordered={false}
-                            style={{ textAlign: 'center' }}
+                        <div
+                            className="card-product"
                         >
-                           
-                        </Card>
-                        </Link>
-                    </List.Item>
-                )}
-            />
+                            <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: 'auto' }} />
+                            <div className="description">
+                                <div className='price'>
+                                    <span>${item.price.amount}</span>
+                                    {item.free_shipping && (
+                                        <img src={Shipping} />
+                                    )}
+                                </div>
+                                <span>{item.title}</span>
+                            </div>
+                        </div>
+                    </Link>
+
+                ))
+
             )}
-            
-           
+
+
         </>
     );
 };

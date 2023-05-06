@@ -55,7 +55,7 @@ app.get('/api/items/:id', async (req, res) => {
         amount: Math.floor(itemResponse.data.price),
         decimals: (itemResponse.data.price % 1).toFixed(2).substring(2)
       },
-      picture: itemResponse.data.pictures[0]?.url || itemResponse.data.thumbnail,
+      picture: itemResponse.data.thumbnail,
       condition: itemResponse.data.condition,
       free_shipping: itemResponse.data.shipping.free_shipping,
       sold_quantity: itemResponse.data.sold_quantity,
