@@ -4,15 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../redux/actions';
 import { BoxSearch } from './BoxSearch';
 import Shipping from '../img/shipping.png'
+import { Pagination } from 'antd';
 
 export const ResultSearch = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+
     const { search: urlSearch } = useParams();
 
     const dispatch = useDispatch();
 
     const products = useSelector((state) => state.products);
     console.log({ products })
-
+    
+    const productsPerPage = 4;
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
     const [search, setSearch] = useState(urlSearch);
 
     useEffect(() => {
@@ -29,12 +36,12 @@ export const ResultSearch = () => {
         <>
             <BoxSearch />
             {products && (
-                products.map(item => (
+                currentProducts.map(item => (
                     <Link to={`/items/${item.id}/description`}>
                         <div
                             className="card-product"
                         >
-                            <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: 'auto' }} />
+                            <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: '180px' }} />
                             <div className="description">
                                 <div className='price'>
                                     <span>${item.price.amount}</span>
@@ -42,15 +49,19 @@ export const ResultSearch = () => {
                                         <img src={Shipping} />
                                     )}
                                 </div>
-                                <span>{item.title}</span>
+                                <span className='title'>{item.title}</span>
                             </div>
                         </div>
                     </Link>
-
                 ))
 
             )}
-
+            <Pagination
+                current={currentPage}
+                pageSize={productsPerPage}
+                total={products.length}
+                onChange={setCurrentPage}
+            />
 
         </>
     );

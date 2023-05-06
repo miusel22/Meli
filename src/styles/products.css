@@ -4,17 +4,20 @@
     margin-left: 200px;
     margin-right: 200px;
     background-color: white;
+    border-bottom: 1px solid #EEEEEE;
 
 }
 
 .card-product img {
-    padding: 10px;
+    padding: 16px;
+    border-radius: 4px;
 }
 
 .description {
     display: flex;
     flex-direction: column;
     color: #333333;
+    padding-top: 16px;
 }
 
 span {
@@ -31,8 +34,11 @@ a{
 display: flex;
 flex-direction: row;
 align-items: center;
+padding-bottom: 32px;
 }
 .price img{
 width: 20px;
 }
-
+.title{
+padding: 0;
+}
