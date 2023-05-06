@@ -1,26 +1,22 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Input } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
+;
 
 const { Search } = Input;
 
-export const BoxSearch = () => {
-    const dispatch = useDispatch();
-    const [search, setSearch] = useState("");
-    const products = useSelector((state) => state.products);
 
-    useEffect(() => {
-        dispatch(fetchProducts(search));
-    }, [dispatch, search]);
-    console.log({ products })
+export const BoxSearch = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <header>
-                <Search placeholder="Nunca dejes de buscar" onSearch={(v) => {
-                    setSearch(v)
+                <Search placeholder="Nunca dejes de buscar" onSearch={(value) => {
+                    navigate(`/items/${value}`);
                 }} enterButton />
+
             </header>
 
         </>
