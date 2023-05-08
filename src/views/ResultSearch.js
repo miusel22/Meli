@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../redux/actions';
 import { BoxSearch } from './BoxSearch';
-import Shipping from '../img/shipping.png'
-import { Pagination } from 'antd';
-
+import Shipping from '../img/shipping.png';
+import { formatNumber } from '../utils';
+import _ from 'lodash';
 export const ResultSearch = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -23,7 +23,7 @@ export const ResultSearch = () => {
      const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
      const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);*/
     const [search, setSearch] = useState(urlSearch);
-
+ 
     useEffect(() => {
         setSearch(urlSearch);
     }, [urlSearch]);
@@ -52,7 +52,8 @@ export const ResultSearch = () => {
                                 <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: '180px' }} />
                                 <div className="description">
                                     <div className='price'>
-                                        <span>${item.price.amount}</span>
+                                        <span>${formatNumber(item.price.amount)}</span>
+                                       
                                         {item.free_shipping && (
                                             <img src={Shipping} />
                                         )}
