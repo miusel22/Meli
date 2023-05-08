@@ -15,7 +15,9 @@ const initialState = {
 
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
+  
     case FETCH_PRODUCTS_SUCCESS:
+      console.log("hi",action.payload.categories);
       return {
         ...state,
         loading: false,

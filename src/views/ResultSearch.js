@@ -14,12 +14,13 @@ export const ResultSearch = () => {
     const dispatch = useDispatch();
 
     const products = useSelector((state) => state.products);
-    console.log({ products })
+    const categories = useSelector((state)=> state.categories);
+    console.log({ products,categories })
     
-    const productsPerPage = 4;
+   /* const productsPerPage = 4;
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);*/
     const [search, setSearch] = useState(urlSearch);
 
     useEffect(() => {
@@ -35,8 +36,9 @@ export const ResultSearch = () => {
     return (
         <>
             <BoxSearch />
+            <div className='all-products'>
             {products && (
-                currentProducts.map(item => (
+                products.map(item => (
                     <Link to={`/items/${item.id}/description`}>
                         <div
                             className="card-product"
@@ -56,12 +58,14 @@ export const ResultSearch = () => {
                 ))
 
             )}
-            <Pagination
+            </div>
+          
+            {/*<Pagination
                 current={currentPage}
                 pageSize={productsPerPage}
                 total={products.length}
                 onChange={setCurrentPage}
-            />
+            />*/}
 
         </>
     );

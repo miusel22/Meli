@@ -10,7 +10,9 @@ app.get('/api/items', async (req, res) => {
   try {
     res.header('Access-Control-Allow-Origin', '*');
     const response = await axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${query}`);
-    const categories = response.data.filters[0]?.values[0]?.path_from_root.map(category => category.name) || [];
+    const categories = response.data.available_filters.find(filter => filter.id === 'category').values.map(category => category.name) || [];
+
+    console.log({ categories });
     const items = response.data.results.map(result => ({
       id: result.id,
       title: result.title,
@@ -63,21 +65,21 @@ app.get('/api/items/:id', async (req, res) => {
     };
 
     const responseObj = {
-    author: {
+      author: {
         name: 'Camila',
         lastname: 'Vélez'
-    },
-    item
+      },
+      item
     };
     res.json(responseObj);
-} catch (error) {
+  } catch (error) {
     console.error(error);
     res.status(500).send('Error al obtener detalles del producto');
-}
+  }
 });
 
 // Iniciar el servidor
 const PORT = 5000;
 app.listen(PORT, () => {
-console.log(`Servidor iniciado en el puerto ${PORT}`);
+  console.log(`Servidor iniciado en el puerto ${PORT}`);
 });

@@ -39,7 +39,6 @@ export const fetchProductDetails = (id) => async (dispatch) => {
   console.log({id})
   try {
     const response = await axios.get(`http://localhost:5000/api/items/${id}`);
-    console.log(response)
     dispatch(fetchProductDetailsSuccess(response.data));
   } catch (error) {
     dispatch(fetchProductDetailsFailure(error.message));
