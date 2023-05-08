@@ -14,13 +14,14 @@ export const ResultSearch = () => {
     const dispatch = useDispatch();
 
     const products = useSelector((state) => state.products);
-    const categories = useSelector((state)=> state.categories);
-    console.log({ products,categories })
-    
-   /* const productsPerPage = 4;
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);*/
+    const categories = useSelector((state) => state.categories);
+    console.log({ products, categories })
+    console.log("hi");
+
+    /* const productsPerPage = 4;
+     const indexOfLastProduct = currentPage * productsPerPage;
+     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);*/
     const [search, setSearch] = useState(urlSearch);
 
     useEffect(() => {
@@ -36,30 +37,35 @@ export const ResultSearch = () => {
     return (
         <>
             <BoxSearch />
-            <div className='all-products'>
-            {products && (
-                products.map(item => (
-                    <Link to={`/items/${item.id}/description`}>
-                        <div
-                            className="card-product"
-                        >
-                            <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: '180px' }} />
-                            <div className="description">
-                                <div className='price'>
-                                    <span>${item.price.amount}</span>
-                                    {item.free_shipping && (
-                                        <img src={Shipping} />
-                                    )}
-                                </div>
-                                <span className='title'>{item.title}</span>
-                            </div>
-                        </div>
-                    </Link>
-                ))
-
-            )}
+            <div className="categories-container">
+                {categories && (categories.map((category, index) => (
+                    <span key={index} className="category">{category}{index !== categories.length - 1 && ' > '}</span>
+                )))}
             </div>
-          
+            <div className='all-products'>
+                {products && (
+                    products.map(item => (
+                        <Link to={`/items/${item.id}/description`}>
+                            <div
+                                className="card-product"
+                            >
+                                <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: '180px' }} />
+                                <div className="description">
+                                    <div className='price'>
+                                        <span>${item.price.amount}</span>
+                                        {item.free_shipping && (
+                                            <img src={Shipping} />
+                                        )}
+                                    </div>
+                                    <span className='title'>{item.title}</span>
+                                </div>
+                            </div>
+                        </Link>
+                    ))
+
+                )}
+            </div>
+
             {/*<Pagination
                 current={currentPage}
                 pageSize={productsPerPage}

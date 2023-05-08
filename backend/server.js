@@ -1,18 +1,19 @@
 const express = require('express');
 const axios = require('axios');
+const _ = require('lodash');
 
 const app = express();
 
-// Endpoint para buscar productos
 app.get('/api/items', async (req, res) => {
   const query = req.query.q;
 
   try {
     res.header('Access-Control-Allow-Origin', '*');
     const response = await axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${query}`);
-    const categories = response.data.available_filters.find(filter => filter.id === 'category').values.map(category => category.name) || [];
-
-    console.log({ categories });
+    const categories = response.data.available_filters.find(filter => filter.id === 'category').values.map(category => ({
+      id: category.id,
+      nameCategory: category.name
+    })) || [];
     const items = response.data.results.map(result => ({
       id: result.id,
       title: result.title,
@@ -40,7 +41,6 @@ app.get('/api/items', async (req, res) => {
   }
 });
 
-// Endpoint para obtener detalles de un producto
 app.get('/api/items/:id', async (req, res) => {
   const id = req.params.id;
   res.header('Access-Control-Allow-Origin', '*');
@@ -52,6 +52,7 @@ app.get('/api/items/:id', async (req, res) => {
     const item = {
       id: itemResponse.data.id,
       title: itemResponse.data.title,
+      category_id: itemResponse.data.category_id,
       price: {
         currency: itemResponse.data.currency_id,
         amount: Math.floor(itemResponse.data.price),

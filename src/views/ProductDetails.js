@@ -10,10 +10,10 @@ export const ProductDetails = () => {
   const dispatch = useDispatch();
   console.log(urlId);
 
- const details = useSelector((state) => state.productDetails);
-  console.log({ details })
+  const details = useSelector((state) => state.productDetails);
+  const categories = useSelector((state) => state.categories);
 
- const [id, setId] = useState(urlId);
+  const [id, setId] = useState(urlId);
 
   useEffect(() => {
     setId(urlId);
@@ -27,7 +27,8 @@ export const ProductDetails = () => {
 
   return (
     <>
-     <BoxSearch />
+      <BoxSearch />
+      {categories && (<p className="categories">{categories.join(" > ")}</p>)}
     </>
   );
 };
