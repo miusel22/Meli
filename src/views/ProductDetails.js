@@ -10,8 +10,7 @@ export const ProductDetails = () => {
   const { id: urlId } = useParams();
 
   const dispatch = useDispatch();
-  const details = useSelector((state) => state.productDetails);
-  const categories = useSelector((state) => state.categories);
+  const { productDetails: details, categories } = useSelector((state) => state);
   const [id, setId] = useState(urlId);
 
   useEffect(() => {
@@ -23,17 +22,22 @@ export const ProductDetails = () => {
       dispatch(fetchProductDetails(id));
     }
   }, [dispatch, id]);
-  console.log({details});
+
+  const renderCategories = () => {
+    if (!categories) return null;
+
+    return categories.map((category, index) => (
+      <span key={index} className="category">{category}{index !== categories.length - 1 && ' > '}</span>
+    ));
+  };
 
   return (
     <>
-      <BoxSearch showHome={false}/>
+      <BoxSearch showHome={false} />
       <div className="categories-container">
-        {categories && (categories.map((category, index) => (
-          <span key={index} className="category">{category}{index !== categories.length - 1 && ' > '}</span>
-        )))}
+        {renderCategories()}
       </div>
-      {details && (
+      {details ? (
         <div className="product">
           <div className='product-two'>
             <img src={details.picture.replace("-I.jpg", "-O.jpg")} alt={details.title} style={{ maxWidth: '668px' }} />
@@ -43,14 +47,13 @@ export const ProductDetails = () => {
               <span>${formatPrice(details.price.amount)}</span>
               <button>Comprar</button>
             </div>
-
           </div>
           <div className='product-description'>
             <span>Descripción del producto</span>
             <span>{details.description}</span>
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

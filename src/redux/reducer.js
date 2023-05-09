@@ -16,21 +16,20 @@ const initialState = {
 
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
-  
+
     case FETCH_PRODUCTS_SUCCESS:
-      console.log("xd",action.payload.categories);
       return {
         ...state,
         loading: false,
         products: action.payload.items, // actualizar los datos con la lista de productos
-        categories: _.take(_.map(action.payload.categories, (category)=> category.nameCategory),5), // añadir las categorías
+        categories: _.take(_.map(action.payload.categories, (category) => category.nameCategory), 5), // añadir las categorías
         error: null
       };
     case FETCH_PRODUCT_DETAILS_SUCCESS:
       return {
         ...state,
         loading: false,
-        productDetails: action.payload.item, 
+        productDetails: action.payload.item,
         error: null
       };
     case FETCH_PRODUCTS_FAILURE:
