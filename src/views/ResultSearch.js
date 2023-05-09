@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../redux/actions';
 import { BoxSearch } from './BoxSearch';
 import Shipping from '../img/shipping.png';
-import { formatNumber } from '../utils';
+import { formatPrice } from '../utils';
 import _ from 'lodash';
 export const ResultSearch = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -50,15 +50,18 @@ export const ResultSearch = () => {
                                 className="card-product"
                             >
                                 <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: '180px' }} />
-                                <div className="description">
+                                <div className="detail">
                                     <div className='price'>
-                                        <span>${formatNumber(item.price.amount)}</span>
-                                       
+                                        <span>${formatPrice(item.price.amount)}</span>
                                         {item.free_shipping && (
                                             <img src={Shipping} />
                                         )}
                                     </div>
+                                    <div className='description'>
+                                    <span>{item.country}</span>
                                     <span className='title'>{item.title}</span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </Link>

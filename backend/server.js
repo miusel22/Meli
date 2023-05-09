@@ -24,7 +24,8 @@ app.get('/api/items', async (req, res) => {
       },
       picture: result.thumbnail,
       condition: result.condition,
-      free_shipping: result.shipping.free_shipping
+      free_shipping: result.shipping.free_shipping,
+      country: result.seller_address.city.name
     }));
     const responseObj = {
       author: {
@@ -56,7 +57,7 @@ app.get('/api/items/:id', async (req, res) => {
       price: {
         currency: itemResponse.data.currency_id,
         amount: Math.floor(itemResponse.data.price),
-        decimals: (itemResponse.data.price % 1).toFixed(2).substring(2)
+        decimals: _.toNumber("00"),
       },
       picture: itemResponse.data.thumbnail,
       condition: itemResponse.data.condition,
