@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils';
 import _ from 'lodash';
 import Shipping from '../img/shipping.png';
+import { Spin } from 'antd';
+
 export const Products = ({ search }) => {
-
+    const [load, setLoad] = useState(true);
     const dispatch = useDispatch();
-
-    const products = useSelector((state) => state.products);
-    const categories = useSelector((state) => state.categories);
+    const { products, categories, loading } = useSelector((state) => state);
     const [toSearch, setToSearch] = useState("");
-    console.log({categories});
+    console.log({ categories });
 
     useEffect(() => {
         if (search) {
@@ -23,6 +23,13 @@ export const Products = ({ search }) => {
     }, [search]);
 
     useEffect(() => {
+        if (!loading) {
+            setLoad(false);
+        }
+
+    }, [loading]);
+
+    useEffect(() => {
         if (toSearch) {
             dispatch(fetchProducts(toSearch));
 
@@ -31,7 +38,7 @@ export const Products = ({ search }) => {
 
 
     return (
-        <>
+        <>{!load ? (<>
             <div className="categories-container">
                 {categories && (categories.map((category, index) => (
                     <span key={index} className="category">{category}{index !== categories.length - 1 && ' > '}</span>
@@ -44,7 +51,7 @@ export const Products = ({ search }) => {
                             <div
                                 className="card-product"
                             >
-                                <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ maxWidth: '180px', height: '180px' }} />
+                                <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ width: '180px', height: '180px' }} />
                                 <div className="detail">
                                     <div className='price'>
                                         <span>${formatPrice(item.price.amount)}</span>
@@ -54,7 +61,7 @@ export const Products = ({ search }) => {
                                     </div>
                                     <div className='description'>
                                         <span>{item.country}</span>
-                                        <span className='title'>{item.title}</span>
+                                        <span style={{ maxWidth: '390px' }} className='title'>{item.title}</span>
                                     </div>
 
                                 </div>
@@ -64,6 +71,8 @@ export const Products = ({ search }) => {
 
                 )}
             </div>
+        </>) : <Spin />}
+
         </>
     );
 };

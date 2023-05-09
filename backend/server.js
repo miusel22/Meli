@@ -25,12 +25,13 @@ app.get('/api/items', async (req, res) => {
       price: {
         currency: result.currency_id,
         amount: Math.floor(result.price),
-        decimals: (result.price % 1).toFixed(2).substring(2)
+        decimals: 2
       },
       picture: result.thumbnail,
       condition: result.condition,
       free_shipping: result.shipping.free_shipping,
       country: result.seller_address.city.name,
+      link: result.permalink
     }));
     const responseObj = {
       author: {

@@ -3,13 +3,18 @@ import { Input } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../img/Logo.png';
 import { Home } from '../components/Home';
+import _ from 'lodash';
 
 const { Search } = Input;
 
-export const BoxSearch = ({ showHome = true }) => {
-    const [show, setShow] = useState(showHome);
+export const BoxSearch = ({ showHome }) => {
+
+    console.log({ showHome })
+    const [show, setShow] = useState(false);
     useEffect(() => {
-        setShow(showHome ?? true);
+        if (_.isUndefined(showHome)) {
+            setShow(true);
+        }
     }, [showHome]);
 
     const navigate = useNavigate();
