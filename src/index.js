@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from './redux/store';
 import './styles/boxSearch.css';
 import './styles/products.css'
+import './styles/home.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

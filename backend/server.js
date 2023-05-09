@@ -10,10 +10,12 @@ app.get('/api/items', async (req, res) => {
   try {
     res.header('Access-Control-Allow-Origin', '*');
     const response = await axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${query}`);
-    const categories = response.data.available_filters.find(filter => filter.id === 'category').values.map(category => ({
-      id: category.id,
-      nameCategory: category.name
-    })) || [];
+    const categories = response?.data?.available_filters.find(filter => filter.id === 'category') ?
+      response.data.available_filters.find(filter => filter.id === 'category').values.map(category => ({
+        id: category.id,
+        nameCategory: category.name
+      })) :
+      response.data.filters.find(filter => filter.id === 'category').values.flatMap(category => category.path_from_root.map(({ name }) => name))
     const items = response.data.results.map(result => ({
       id: result.id,
       title: result.title,
@@ -25,15 +27,15 @@ app.get('/api/items', async (req, res) => {
       picture: result.thumbnail,
       condition: result.condition,
       free_shipping: result.shipping.free_shipping,
-      country: result.seller_address.city.name
+      country: result.seller_address.city.name,
     }));
     const responseObj = {
       author: {
         name: 'Nombre del autor',
         lastname: 'Apellido del autor'
       },
-      categories,
-      items
+      items,
+      categories
     };
     res.json(responseObj);
   } catch (error) {
@@ -50,6 +52,7 @@ app.get('/api/items/:id', async (req, res) => {
       axios.get(`https://api.mercadolibre.com/items/${id}`),
       axios.get(`https://api.mercadolibre.com/items/${id}/description`)
     ]);
+    console.log("hihi",itemResponse.data);
     const item = {
       id: itemResponse.data.id,
       title: itemResponse.data.title,
@@ -57,7 +60,7 @@ app.get('/api/items/:id', async (req, res) => {
       price: {
         currency: itemResponse.data.currency_id,
         amount: Math.floor(itemResponse.data.price),
-        decimals: _.toNumber("00"),
+        decimals: (itemResponse.data.price % 1).toFixed(2).substring(2)
       },
       picture: itemResponse.data.thumbnail,
       condition: itemResponse.data.condition,
