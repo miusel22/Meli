@@ -15,7 +15,10 @@ app.get('/api/items', async (req, res) => {
         id: category.id,
         nameCategory: category.name
       })) :
-      response.data.filters.find(filter => filter.id === 'category').values.flatMap(category => category.path_from_root.map(({ name }) => name))
+      response.data.filters.find(filter => filter.id === 'category').values.flatMap(category => category.path_from_root.map((category) => ({
+        id: category.id,
+        nameCategory: category.name
+      })));
     const items = response.data.results.map(result => ({
       id: result.id,
       title: result.title,
@@ -52,7 +55,7 @@ app.get('/api/items/:id', async (req, res) => {
       axios.get(`https://api.mercadolibre.com/items/${id}`),
       axios.get(`https://api.mercadolibre.com/items/${id}/description`)
     ]);
-    console.log("hihi",itemResponse.data);
+    console.log("hihi", itemResponse.data);
     const item = {
       id: itemResponse.data.id,
       title: itemResponse.data.title,

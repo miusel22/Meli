@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../img/Logo.png';
 import { Home } from '../components/Home';
 
@@ -18,7 +18,9 @@ export const BoxSearch = ({ showHome = true }) => {
     <>
       <header>
         <div className="box">
-          <img src={Logo} alt="Logo de la aplicación" role="img" />
+         <Link to="/">
+         <img src={Logo} alt="Logo de la aplicación" role="img" />
+         </Link> 
           <Search
             className="custom-search"
             placeholder="Nunca dejes de buscar"
