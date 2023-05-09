@@ -18,7 +18,6 @@ export const BoxSearch = () => {
                         navigate(`/items/${value}`);
                     }} enterButton />
                 </div>
-
             </header>
 
         </>

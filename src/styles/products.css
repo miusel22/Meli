@@ -87,11 +87,12 @@ a {
     margin-left: 200px;
     margin-right: 200px;
     background-color: white;
+    margin-bottom: 32px;
 }
 
 .product-two img {
     padding-bottom: 32px;
-    padding-left:  32px;
+    padding-left: 32px;
     padding-right: 32px;
 }
 
@@ -125,13 +126,19 @@ a {
     font-size: 48px;
     padding-bottom: 32px;
 }
-.product-details button{
+
+.product-details button {
     background-color: #3483FA;
     width: 200px;
     height: 35px;
-    border:0px;
+    border: 0px;
     color: white;
     border-radius: 4px;
+    font-size: 16px;
+}
+
+.product-details:hover {
+    cursor: pointer;
 }
 
 .product-description {
@@ -149,5 +156,135 @@ a {
 .product-description span:last-child {
     padding-top: 32px;
     padding-bottom: 32px;
-    color: #999999
+    color: #999999;
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+    .card-product {
+        flex-direction: column;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .card-product img {
+        width: 100%;
+    }
+
+    .detail {
+        padding-top: 8px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .product {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .product-two {
+        flex-direction: column;
+    }
+
+    .product-two img {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .product-description span:first-child {
+        font-size: 24px;
+    }
+
+    .product-description span:last-child {
+        font-size: 14px;
+    }
+
+    .product-details {
+
+        padding-left: 32px;
+    }
+
+    .product-details span:first-child {
+        font-size: 12px;
+        padding-top: 16px;
+    }
+
+    .product-details span:nth-child(2) {
+        font-size: 20px;
+    }
+
+    .product-details span:nth-child(3) {
+        font-size: 36px;
+    }
+
+    .categories-container {
+        margin-left: 0;
+        margin-right: 0;
+        font-size: 12px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}
+
+/* Estilos para pantallas de hasta 992px de ancho */
+@media screen and (max-width: 992px) {
+    .product-description span:first-child {
+        font-size: 20px;
+    }
+
+    .product-description span:last-child {
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 20px;
+    }
+
+    .product-details span:first-child {
+        font-size: 12px;
+        padding-top: 16px;
+    }
+
+    .product-details span:nth-child(2) {
+        font-size: 28px;
+    }
+
+    .product-details span:nth-child(3) {
+        font-size: 54px;
+    }
+
+    .categories-container {
+        font-size: 12px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .product-two{
+    flex-direction: column;
+    }
+
+    .product-two img {
+        width: 250px;
+    }
+}
+
+/* Estilos para pantallas de más de 992px de ancho */
+@media screen and (min-width: 993px) {
+    .card-product {
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    .product {
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    .categories-container {
+        font-size: 14px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
 }

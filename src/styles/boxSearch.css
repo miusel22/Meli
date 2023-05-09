@@ -1,21 +1,53 @@
-.box{
-background-color: #FFE600;
-display: flex;
-flex-direction: row;
-align-items: center;
-padding-left: 200px;
-padding-right: 200px;
-padding-bottom: 10px;
-padding-top: 10px;
+.box {
+  background-color: #FFE600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
-.box img{
-    width: 48px;
-    padding-right: 10px;
+
+.box img {
+  width: 48px;
+  padding-right: 10px;
 }
+
 .custom-search {
-    background-color: #EEEEEE !important;
+  background-color: #EEEEEE !important;
+}
+
+.custom-search .ant-input-search-icon {
+  color: #666666 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .box {
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px;
   }
-  
-  .custom-search .ant-input-search-icon {
-    color: #666666 !important;
+
+  .box img {
+    margin-bottom: 10px;
+    padding-right: 0px;
   }
+}
+
+.css-dev-only-do-not-override-yp8pcc .ant-btn-primary {
+  color: #666666;
+  background-color:  #EEEEEE;
+  box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
+  border-color: none;
+}
+
+.css-dev-only-do-not-override-yp8pcc .ant-btn-primary:hover {
+  color: #666666;
+  background-color:  #EEEEEE;
+  box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
+  border-color: none;
+}
+.ant-btn-primary .anticon-search {
+  font-size: 17px;
+}
