@@ -19,10 +19,8 @@ export const ProductDetails = () => {
     if (!loading) {
       setLoad(false);
     }
-
   }, [loading]);
 
-  console.log({ load });
   useEffect(() => {
     setId(urlId);
   }, [urlId]);
@@ -33,17 +31,16 @@ export const ProductDetails = () => {
     }
   }, [dispatch, id]);
 
-  const renderCategories = () => {
+  const renderCategories = () => { //se obtiene las categorias a las que pertenece el producto buscado.
     if (!categories) return null;
 
     return categories.map((category, index) => (
       <span key={index} className="category">{category}{index !== categories.length - 1 && ' > '}</span>
     ));
   };
-  console.log({ details })
   return (
     <>
-      <BoxSearch showHome={false} />
+      <BoxSearch />
       <div className="categories-container">
         {renderCategories()}
       </div>
@@ -65,7 +62,8 @@ export const ProductDetails = () => {
           </div>
           <div className='product-description'>
             <span>Descripción del producto</span>
-            <span>{details.description}</span>
+            {details.description ? (<span>{details.description}</span>) :
+            <span>Sin descripción</span>}
           </div>
         </div>
       ) : <Spin />}

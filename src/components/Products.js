@@ -12,14 +12,13 @@ export const Products = ({ search }) => {
     const dispatch = useDispatch();
     const { products, categories, loading } = useSelector((state) => state);
     const [toSearch, setToSearch] = useState("");
-    console.log({ categories });
 
     useEffect(() => {
         if (search) {
             setToSearch(search);
         } else {
-            setToSearch("maquillaje");
-        }
+            setToSearch("maquillaje"); // este componente se visualiza en el <Home/> con productos para el
+        }                              // día de la madre si el usuario no ha buscado algún producto.
     }, [search]);
 
     useEffect(() => {
@@ -56,7 +55,7 @@ export const Products = ({ search }) => {
                                     <div className='price'>
                                         <span>${formatPrice(item.price.amount)}</span>
                                         {item.free_shipping && (
-                                            <img src={Shipping} />
+                                            <img src={Shipping} alt="shipping"/>
                                         )}
                                     </div>
                                     <div className='description'>

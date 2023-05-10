@@ -21,8 +21,8 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        products: action.payload.items,
-        categories: _.take(_.map(action.payload.categories, (category) => category.nameCategory), 5), // añadir las categorías
+        products: _.take(action.payload.items,4),
+        categories: _.take(_.map(action.payload.categories, (category) => category.nameCategory), 5),
         error: null
       };
     case FETCH_PRODUCT_DETAILS_SUCCESS:

@@ -18,8 +18,6 @@ export const Home = () => {
 
     }, [loading]);
 
-
-
     return (
         <>
             <Carousel autoplay className='banner'>
@@ -34,7 +32,6 @@ export const Home = () => {
                 </div>
             </Carousel>
             {!load ? ( <Products />) : <Spin/>}
-           
 
         </>
     );

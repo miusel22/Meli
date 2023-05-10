@@ -7,7 +7,7 @@ export const ResultSearch = () => {
   const { search: urlSearch } = useParams();
   return (
     <>
-      <BoxSearch showHome={false} />
+      <BoxSearch/>
       {urlSearch && <Products search={urlSearch} />}
     </>
   );

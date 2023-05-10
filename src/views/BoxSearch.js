@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import Logo from '../img/Logo.png';
 import { Home } from '../components/Home';
-import _ from 'lodash';
+import _  from 'lodash';
 
 const { Search } = Input;
 
-export const BoxSearch = ({ showHome }) => {
+export const BoxSearch = () => {
+    const params = useParams();
 
-    console.log({ showHome })
+
     const [show, setShow] = useState(false);
+
     useEffect(() => {
-        if (_.isUndefined(showHome)) {
+        if (_.isEmpty(params)) {
             setShow(true);
         }
-    }, [showHome]);
+    }, [params]);
 
     const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ export const BoxSearch = ({ showHome }) => {
             <header>
                 <div className="box">
                     <Link to="/">
-                        <img src={Logo} alt="Logo de la aplicación" role="img" />
+                        <img src={Logo} alt="logo" />
                     </Link>
                     <Search
                         className="custom-search"

@@ -4,18 +4,19 @@ const _ = require('lodash');
 
 const app = express();
 
+// Ruta para buscar productos
 app.get('/api/items', async (req, res) => {
   const query = req.query.q;
 
   try {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*'); //configurando el servidor para poder acceder a la API desde un dominio distinto
     const response = await axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${query}`);
-    const categories = response?.data?.available_filters.find(filter => filter.id === 'category') ?
+    const categories = response?.data?.available_filters.find(filter => filter.id === 'category') ? // categorias según el producto buscado
       response.data.available_filters.find(filter => filter.id === 'category').values.map(category => ({
         id: category.id,
         nameCategory: category.name
       })) :
-      response.data.filters.find(filter => filter.id === 'category').values.flatMap(category => category.path_from_root.map((category) => ({
+      response.data.filters.find(filter => filter.id === 'category').values.flatMap(category => category.path_from_root.map((category) => ({ // se accede a las categorias de acuerdo al tipo de producto que busque
         id: category.id,
         nameCategory: category.name
       })));
@@ -32,6 +33,7 @@ app.get('/api/items', async (req, res) => {
       free_shipping: result.shipping.free_shipping,
       country: result.seller_address.city.name,
     }));
+    // Respuesta que se enviará al cliente
     const responseObj = {
       author: {
         name: 'Camila',
@@ -46,10 +48,11 @@ app.get('/api/items', async (req, res) => {
     res.status(500).send('Error al buscar productos');
   }
 });
-
+// Ruta para obtener detalles de un producto
 app.get('/api/items/:id', async (req, res) => {
   const id = req.params.id;
-  res.header('Access-Control-Allow-Origin', '*');
+  
+  res.header('Access-Control-Allow-Origin', '*'); //configurando el servidor para poder acceder a la API desde un dominio distinto
   try {
     const [itemResponse, descriptionResponse] = await Promise.all([
       axios.get(`https://api.mercadolibre.com/items/${id}`),
@@ -71,7 +74,7 @@ app.get('/api/items/:id', async (req, res) => {
       sold_quantity: itemResponse.data.sold_quantity,
       description: descriptionResponse.data.plain_text,
     };
-
+// Construir la respuesta que se enviará al cliente
     const responseObj = {
       author: {
         name: 'Camila',
