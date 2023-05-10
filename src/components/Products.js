@@ -18,7 +18,7 @@ export const Products = ({ search }) => {
         if (search) {
             setToSearch(search);
         } else {
-            setToSearch("cuidado facial");
+            setToSearch("maquillaje");
         }
     }, [search]);
 
@@ -51,7 +51,7 @@ export const Products = ({ search }) => {
                             <div
                                 className="card-product"
                             >
-                                <img src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ width: '180px', height: '180px' }} />
+                                <img className="img-product" src={item.picture.replace("-I.jpg", "-O.jpg")} alt={item.title} style={{ width: '180px', height: '180px' }} />
                                 <div className="detail">
                                     <div className='price'>
                                         <span>${formatPrice(item.price.amount)}</span>
