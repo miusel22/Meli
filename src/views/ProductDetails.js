@@ -56,7 +56,7 @@ export const ProductDetails = () => {
               <span>{details.title}</span>
               <div className='prices'>
               <span>${formatPrice(details.price.amount)}</span>
-              <span>{details.price.decimals}</span>
+              <span className='decimal'>{details.price.decimals}</span>
               </div>
               <button>Comprar</button>
             </div>

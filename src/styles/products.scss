@@ -102,7 +102,7 @@ a {
 }
 
 .product-two img {
-    width: 680px !important;
+    width: 680px;
     height: 680px;
     padding: $padding-green;
 
@@ -126,7 +126,7 @@ a {
     color: $color-title-2;
     padding-top: $padding-green;
     padding-bottom: $padding-red;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .product-details span:nth-child(2) {
@@ -138,6 +138,12 @@ a {
 .prices span:first-child {
     font-size: 48px;
     padding-bottom: $padding-green;
+}
+
+.prices span:last-child {
+    color: $color-title;
+    font-weight: 600;
+    margin-top: -13px;
 }
 
 .prices {
@@ -178,11 +184,7 @@ a {
     border-radius: 4px;
 }
 
-@mixin small-screen {
-    @media (max-width: $small-screen) {
-        // Definir estilos específicos para una pantalla pequeña aquí
-    }
-}
+
 
 @media screen and (max-width: $small-screen) {
     .card-product {
@@ -205,9 +207,9 @@ a {
         padding-bottom: $padding-red;
     }
 
-    .price {
+    /*.price {
         font-size: $font-18;
-    }
+    }*/
 
     .product {
         margin-left: 0;
@@ -216,10 +218,12 @@ a {
 
     .product-two {
         flex-direction: column;
+        align-items: center;
     }
 
     .product-two img {
-        width: 100%;
+        width: 300px;
+        height: 350px;
         padding-left: 0;
         padding-right: 0;
     }
@@ -238,7 +242,7 @@ a {
     }
 
     .product-details span:first-child {
-        font-size: $font-12;
+        font-size: $font-18;
         padding-top: $padding-red;
     }
 
@@ -274,14 +278,16 @@ a {
         font-size: $font-12;
     }
 
-    .price {
-        font-size: 20px;
+    .decimal {
+        margin-top: -15px !important;
+        font-size: $font-12 !important;
     }
 
     .product-details span:first-child {
-        font-size: $font-12;
+        font-size: $font-18;
         padding-top: $padding-red;
     }
+
 
     .product-details span:nth-child(2) {
         font-size: 28px;
