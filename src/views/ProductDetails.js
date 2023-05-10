@@ -40,14 +40,14 @@ export const ProductDetails = () => {
       <span key={index} className="category">{category}{index !== categories.length - 1 && ' > '}</span>
     ));
   };
-  console.log({details})
+  console.log({ details })
   return (
     <>
       <BoxSearch showHome={false} />
       <div className="categories-container">
         {renderCategories()}
       </div>
-      {!load  && details ? (
+      {!load && details ? (
         <div className="product">
           <div className='product-two'>
             <img src={details.picture.replace("-I.jpg", "-O.jpg")} alt={details.title} />
@@ -55,10 +55,12 @@ export const ProductDetails = () => {
               <span>{_.startCase(details.condition)}- {details.sold_quantity} sold</span>
               <span>{details.title}</span>
               <div className='prices'>
-              <span>${formatPrice(details.price.amount)}</span>
-              <span className='decimal'>{details.price.decimals}</span>
+                <span>${formatPrice(details.price.amount)}</span>
+                <span className='decimal'>{details.price.decimals}0</span>
               </div>
-              <button>Comprar</button>
+              <a href={details.link} target='_blank'>
+                <button>Comprar</button>
+              </a>
             </div>
           </div>
           <div className='product-description'>

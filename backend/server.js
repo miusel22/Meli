@@ -25,18 +25,17 @@ app.get('/api/items', async (req, res) => {
       price: {
         currency: result.currency_id,
         amount: Math.floor(result.price),
-        decimals: 2
+        decimals: 00
       },
       picture: result.thumbnail,
       condition: result.condition,
       free_shipping: result.shipping.free_shipping,
       country: result.seller_address.city.name,
-      link: result.permalink
     }));
     const responseObj = {
       author: {
-        name: 'Nombre del autor',
-        lastname: 'Apellido del autor'
+        name: 'Camila',
+        lastname: 'Vélez'
       },
       items,
       categories
@@ -56,7 +55,6 @@ app.get('/api/items/:id', async (req, res) => {
       axios.get(`https://api.mercadolibre.com/items/${id}`),
       axios.get(`https://api.mercadolibre.com/items/${id}/description`)
     ]);
-    console.log("hihi", itemResponse.data);
     const item = {
       id: itemResponse.data.id,
       title: itemResponse.data.title,
@@ -64,13 +62,14 @@ app.get('/api/items/:id', async (req, res) => {
       price: {
         currency: itemResponse.data.currency_id,
         amount: Math.floor(itemResponse.data.price),
-        decimals: (itemResponse.data.price % 1).toFixed(2).substring(2)
+        decimals: 00
       },
       picture: itemResponse.data.thumbnail,
       condition: itemResponse.data.condition,
+      link: itemResponse.data.permalink,
       free_shipping: itemResponse.data.shipping.free_shipping,
       sold_quantity: itemResponse.data.sold_quantity,
-      description: descriptionResponse.data.plain_text
+      description: descriptionResponse.data.plain_text,
     };
 
     const responseObj = {

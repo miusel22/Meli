@@ -21,7 +21,7 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        products: action.payload.items, // actualizar los datos con la lista de productos
+        products: action.payload.items,
         categories: _.take(_.map(action.payload.categories, (category) => category.nameCategory), 5), // añadir las categorías
         error: null
       };
