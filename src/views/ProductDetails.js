@@ -50,7 +50,7 @@ export const ProductDetails = () => {
       {!load  && details ? (
         <div className="product">
           <div className='product-two'>
-            <img src={details.picture.replace("-I.jpg", "-O.jpg")} alt={details.title} style={{ maxWidth: '668px' }} />
+            <img src={details.picture.replace("-I.jpg", "-O.jpg")} alt={details.title} />
             <div className='product-details'>
               <span>{_.startCase(details.condition)}- {details.sold_quantity} sold</span>
               <span>{details.title}</span>

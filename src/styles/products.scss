@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 .card-product {
     display: flex;
     flex-direction: row;
@@ -81,15 +83,15 @@ a {
     flex-direction: column;
     align-items: center;
 
-  }
-  
-  .description span:first-child {
+}
+
+.description span:first-child {
     margin-left: auto;
-  }
-  
-  .description span.title {
+}
+
+.description span.title {
     margin-right: auto;
-  }
+}
 
 .product {
     display: flex;
@@ -101,7 +103,10 @@ a {
 }
 
 .product-two img {
-    padding:32px;
+    width: 680px !important;
+    height: 680px;
+    padding: 32px;
+
 }
 
 .product-two {
@@ -128,16 +133,17 @@ a {
 .product-details span:nth-child(2) {
     font-size: 24px;
     font-weight: 600;
-    width: 60%;
+    width: 70%;
 }
 
 .prices span:first-child {
     font-size: 48px;
-    padding-bottom: 32px;
+    padding-bottom: $padding-green;
 }
-.prices{
-display: flex;
-align-items: center;
+
+.prices {
+    display: flex;
+    align-items: center;
 }
 
 .product-details button {
@@ -168,7 +174,7 @@ align-items: center;
 
 .product-description span:last-child {
     padding-top: 32px;
-    padding-bottom: 32px;
+    padding-bottom: $padding-primary;
     color: #999999;
     border-radius: 4px;
 }
