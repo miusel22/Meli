@@ -13,3 +13,6 @@ Tecnologías utilizadas:
 3. Ingresa a la rama mastes: git checkout master
 4. Instala las dependencias: npm i
 5. Inicia la aplicación: npm start
+
+# Consideraciones:
+Debes tener instalado Node >= 6
